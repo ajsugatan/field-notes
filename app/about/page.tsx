@@ -51,7 +51,7 @@ export default function AboutPage() {
             <div className="relative w-full aspect-square overflow-hidden bg-black/5">
               <Image
                 src="/portrait-placeholder.jpg"
-                alt="AJ Sugatan — portrait"
+                alt="Alexandra Julia Sugatan — portrait"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 20vw"
@@ -62,7 +62,7 @@ export default function AboutPage() {
           {/* Bio */}
           <div className="lg:col-span-4 space-y-5">
             <p className="font-ui font-normal text-ink text-[1rem] leading-relaxed m-0">
-              AJ Sugatan is a designer and strategist who treats research as a
+              Alexandra Julia Sugatan is a designer and strategist who treats research as a
               creative discipline and creative work as a research discipline.
               Pacific Islander, co-founder of Fat F*cks, Muay Thai practitioner,
               occasional DJ, keeper of too many notebooks.

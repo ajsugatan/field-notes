@@ -15,8 +15,8 @@ const config: Config = {
       fontFamily: {
         display: ['"Hanken Grotesk"', "sans-serif"],
         ui: ['"Hanken Grotesk"', "sans-serif"],
-        body: ['"Newsreader"', "Georgia", "serif"],
-        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+        body: ['"Hanken Grotesk"', "sans-serif"],
+        mono: ['"Hanken Grotesk"', "sans-serif"],
       },
       letterSpacing: {
         tightest: "-0.04em",

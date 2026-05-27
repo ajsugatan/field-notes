@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="hairline mb-6" />
       <div className="flex items-center justify-between">
         <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
-          Field Notes — AJ Sugatan — Vol. I
+          Field Notes — Alexandra Julia Sugatan — Vol. I
         </span>
         <div className="flex items-center gap-6 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
           <span>© 2026</span>

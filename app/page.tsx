@@ -12,13 +12,13 @@ export default function HomePage() {
           Field Notes
         </span>
         <span className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink">
-          AJ Sugatan · Vol. I
+          Alexandra Julia Sugatan · Vol. I
         </span>
       </div>
 
       <div className="h-24" />
 
-      <Manifesto alignment="left" text="I notice things for a living." />
+      <Manifesto alignment="left" text="the most fun a girl can have is finding parallels, recognizing patterns, and making connections" />
 
       <div className="h-24" />
 
