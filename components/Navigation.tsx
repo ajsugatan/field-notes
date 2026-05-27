@@ -1,24 +1,49 @@
+"use client";
+
 import Link from "next/link";
-import Clock from "./Clock";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/", label: "INDEX" },
+  { href: "/about", label: "ABOUT" },
+  { href: "/now", label: "NOW" },
+];
 
 export default function Navigation() {
+  const pathname = usePathname();
+
   return (
-    <header className="px-6 md:px-12 pt-8 pb-6">
-      <div className="flex items-baseline justify-between gap-6 flex-wrap">
+    <header className="w-full px-6 md:px-10 py-5">
+      <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="font-display text-xl tracking-tightest italic text-ink hover:text-ochreDeep transition-colors duration-500"
+          className="font-ui font-extrabold text-[0.85rem] uppercase tracking-[0.04em] text-ink no-underline"
         >
-          Field Notes
+          FIELD NOTES
         </Link>
-        <nav className="flex items-baseline gap-6 md:gap-8 font-mono text-[0.72rem] tracking-widest uppercase">
-          <Link href="/" className="link-underline">Index</Link>
-          <Link href="/about" className="link-underline">About</Link>
-          <Link href="/now" className="link-underline">Now</Link>
-          <Clock />
+        <nav className="flex items-center gap-8">
+          {links.map(({ href, label }) => {
+            const active = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                style={{ textDecoration: "none" }}
+                className={[
+                  "font-ui font-extrabold text-[0.75rem] uppercase tracking-[0.14em] text-ink",
+                  "relative pb-px",
+                  "after:absolute after:bottom-0 after:left-0 after:h-px after:bg-ink",
+                  "after:transition-[width] after:duration-200 after:ease-out",
+                  active ? "after:w-full" : "after:w-0 hover:after:w-full",
+                ].join(" ")}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
-      <div className="mt-6 h-px w-full bg-ink/15" />
+      <div className="hairline mt-5" />
     </header>
   );
 }

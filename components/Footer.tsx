@@ -1,17 +1,19 @@
-import Link from "next/link";
-
 export default function Footer() {
   return (
-    <footer className="px-6 md:px-12 pt-16 pb-10 mt-24">
-      <div className="h-px w-full bg-ink/15 mb-6" />
-      <div className="flex justify-between items-baseline gap-6 flex-wrap font-mono text-[0.7rem] tracking-widest uppercase text-inkSoft/70">
-        <div>
-          AJ Sugatan / Field Notes <span className="opacity-60">— Vol. I</span>
-        </div>
-        <div className="flex gap-5">
-          <Link href="/about" className="link-underline">Colophon</Link>
-          <a href="mailto:hello@example.com" className="link-underline">
-            Correspondence
+    <footer className="w-full px-6 md:px-10 py-6 mt-12">
+      <div className="hairline mb-6" />
+      <div className="flex items-center justify-between">
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
+          Field Notes — AJ Sugatan — Vol. I
+        </span>
+        <div className="flex items-center gap-6 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
+          <span>© 2026</span>
+          <a
+            href="/about"
+            className="text-ink hover:underline"
+            style={{ textDecoration: "none" }}
+          >
+            Colophon
           </a>
         </div>
       </div>
