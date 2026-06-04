@@ -1,21 +1,25 @@
+import Link from "next/link";
+import Crosshair from "@/components/Crosshair";
+
 export default function Footer() {
   return (
-    <footer className="w-full px-6 md:px-10 py-6 mt-12">
-      <div className="hairline mb-6" />
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
-          Field Notes — Alexandra Julia Sugatan — Vol. I
-        </span>
-        <div className="flex items-center gap-6 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink">
-          <span>© 2026</span>
-          <a
-            href="/about"
-            className="text-ink hover:underline"
-            style={{ textDecoration: "none" }}
-          >
-            Colophon
-          </a>
-        </div>
+    <footer
+      className="relative z-10 mt-auto flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
+      style={{
+        padding: "clamp(30px,5vh,52px) var(--pm)",
+        borderTop: "2.5px solid var(--black)",
+      }}
+    >
+      <div className="flex items-center gap-2.5">
+        <Crosshair size={12} />
+        <span className="mono">field notes™ — vol. I</span>
+      </div>
+      <div className="mono normal-case tracking-[0.1em]">
+        An archive of attention ·{" "}
+        <Link href="/ethnographer" className="link">
+          Colophon
+        </Link>{" "}
+        · 2026
       </div>
     </footer>
   );

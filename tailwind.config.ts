@@ -8,18 +8,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#FFFFFF",
-        ink: "#000000",
-        mute: "#A8A6A0",
+        ink: "var(--ink)",
+        "ink-soft": "var(--ink-soft)",
+        paper: "var(--paper)",
+        "paper-2": "var(--paper-2)",
+        red: "var(--red)",
+        hairline: "var(--hairline)",
+        moss: "var(--moss)",
       },
       fontFamily: {
-        display: ['"Hanken Grotesk"', "sans-serif"],
-        ui: ['"Hanken Grotesk"', "sans-serif"],
-        body: ['"Hanken Grotesk"', "sans-serif"],
-        mono: ['"Hanken Grotesk"', "sans-serif"],
+        sans: "var(--font-sans)",
+        mono: "var(--font-mono)",
+      },
+      fontSize: {
+        display: "var(--fs-display)",
+        h1: "var(--fs-h1)",
+        h2: "var(--fs-h2)",
+        body: "var(--fs-body)",
+        small: "var(--fs-small)",
+        meta: "var(--fs-meta)",
+        tag: "var(--fs-tag)",
+      },
+      maxWidth: {
+        page: "1320px",
       },
       letterSpacing: {
-        tightest: "-0.04em",
+        mono: "0.06em",
       },
     },
   },

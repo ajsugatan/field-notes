@@ -2,26 +2,23 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="pt-24 pb-24 max-w-2xl mx-auto text-center px-6">
-      <div className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-mute mb-8">
-        Off the map · 404
-      </div>
+    <section className="pt-[clamp(120px,18vh,200px)] pb-32" style={{ paddingInline: "var(--pm)" }}>
+      <div className="mono mb-8">Off the map / 404</div>
       <h1
-        className="font-display font-black display-tight leading-[1.02] text-ink m-0"
-        style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+        className="display m-0 max-w-[18ch]"
+        style={{ fontWeight: 200, fontSize: "var(--fs-display)", lineHeight: "var(--lh-display)", letterSpacing: "-0.03em" }}
       >
-        That field note is not here.
+        Not yet — still a note.
       </h1>
-      <p className="mt-8 font-ui font-normal text-[1rem] text-ink leading-relaxed max-w-sm mx-auto">
-        Either it has not been written yet, or it is filed under another
-        heading. Return to the index for what is in print.
-      </p>
-      <Link
-        href="/"
-        className="mt-10 inline-block font-mono text-[0.75rem] tracking-[0.14em] uppercase text-ink hover:underline"
-        style={{ textDecoration: "none" }}
+      <p
+        className="font-sans text-ink-soft mt-8 mb-0 max-w-[52ch]"
+        style={{ fontSize: "var(--fs-body)" }}
       >
-        ← Back to the Index
+        Either this entry hasn&apos;t been written, or it&apos;s filed under another
+        heading. The index holds everything that&apos;s earned a place.
+      </p>
+      <Link href="/" className="btn mt-10">
+        ← BACK TO THE INDEX
       </Link>
     </section>
   );

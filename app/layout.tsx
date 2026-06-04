@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/Navigation";
+import SystemBar from "@/components/SystemBar";
 import Footer from "@/components/Footer";
+import { RailProvider } from "@/components/rail/RailContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Field Notes — Alexandra Julia Sugatan",
+  title: "Field Notes™ — an archive of attention",
   description:
-    "An archive of attention — books, films, songs, scenes from the field, alongside the things I made by looking at them long enough.",
+    "Field Notes — an archive of attention. Alexandra Julia Sugatan: multi-disciplinary designer and strategist. Field studies of how people move through tools, spaces, feelings, and institutions, and the things made by looking long enough to redesign them.",
   openGraph: {
-    title: "Field Notes — Alexandra Julia Sugatan",
+    title: "Field Notes™ — an archive of attention",
     description:
-      "An archive of attention — books, films, songs, scenes from the field.",
+      "An archive of attention — field studies of how people move through tools, spaces, feelings, and institutions.",
     type: "website",
   },
 };
@@ -22,22 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="min-h-screen flex flex-col bg-bg text-ink">
-        <Navigation />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="flex min-h-screen flex-col bg-white text-black">
+        <RailProvider>
+          <SystemBar />
+          <main className="relative z-10 flex-1">{children}</main>
+          <Footer />
+        </RailProvider>
       </body>
     </html>
   );

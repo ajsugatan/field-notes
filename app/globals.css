@@ -2,6 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   FIELD NOTES™ — an archive of attention
+   Black on white only. One grotesque (Helvetica) for UI/metadata,
+   Editorial New (Ultralight) for the largest editorial moments.
+   No gradients, no glass, no shadow, no paper, no accent colour.
+   Negative space is the primary material.
+   ============================================================ */
+
+/* --- Editorial New (Ultralight) — the display face --- */
+@font-face {
+  font-family: "Editorial New";
+  src: url("/fonts/EditorialNew-Ultralight.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- colour: true black / true white ---- */
+  --black: #000000;
+  --white: #ffffff;
+
+  /* Legacy token names kept so every existing page inherits the
+     new identity automatically. The warm palette is gone:
+     paper -> white, ink -> black, the red/moss accents -> black. */
+  --ink: #000000;
+  --ink-soft: #000000; /* no grey — strictly black/white. hierarchy via scale + weight */
+  --paper: #ffffff;
+  --paper-2: #ffffff;
+  --red: #000000; /* accent neutralised to black */
+  --moss: #000000; /* accent neutralised to black */
+  --hairline: #000000; /* crisp black hairline — no grey dividers */
+  --rule: #000000; /* the heavy editorial rule */
+
+  /* ---- type ---- */
+  --font-display: "Editorial New", Helvetica, Arial, sans-serif;
+  --font-ui: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* legacy aliases — keep components working */
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-ui); /* metadata is now grotesque caps, not mono */
+
+  /* ---- type scale ---- */
+  --fs-display: clamp(3.25rem, 11vw, 9rem);
+  --fs-h1: clamp(2.5rem, 6vw, 5.5rem);
+  --fs-h2: clamp(1.35rem, 2.1vw, 1.9rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-meta: 0.6875rem;
+  --fs-tag: 0.6875rem;
+
+  /* line-heights */
+  --lh-display: 0.95;
+  --lh-h1: 1.02;
+  --lh-body: 1.5;
+  --lh-meta: 1.4;
+
+  /* layout */
+  --pm: clamp(18px, 3.4vw, 56px); /* the tight editorial page margin */
+  --rail-edge: 24px;
+  --bar-h: 60px;
+}
+
 *,
 *::before,
 *::after {
@@ -9,34 +71,365 @@
 }
 
 html {
-  background: #ffffff;
+  background: var(--white);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: #ffffff;
-  color: #000000;
-  font-family: "Hanken Grotesk", sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-ui);
+  /* Helvetica Neue Light is the editorial body voice — never regular (400) */
+  font-weight: 300;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-::selection {
-  background: #000000;
-  color: #ffffff;
+/* Helvetica Neue Bold for emphasis / punchy interface text */
+b,
+strong {
+  font-weight: 700;
 }
 
-@layer utilities {
+::selection {
+  background: var(--black);
+  color: var(--white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@layer components {
+  /* ---- the display face — large editorial moments ---- */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+  }
+
+  /* hairline rule (index dividers) */
   .hairline {
     height: 1px;
-    background-color: rgba(0, 0, 0, 0.12);
+    background-color: var(--hairline);
     border: none;
     margin: 0;
   }
+  /* the heavy editorial rule */
+  .rule-bold {
+    height: 0;
+    border: none;
+    border-top: 2.5px solid var(--black);
+    margin: 0;
+  }
 
-  .display-tight {
-    letter-spacing: -0.04em;
+  /* ---- metadata whisper — letterspaced grotesque caps ----
+     (class is still named .mono so every existing page inherits it) */
+  .mono {
+    font-family: var(--font-ui);
+    letter-spacing: 0.16em;
+    font-size: var(--fs-meta);
+    line-height: var(--lh-meta);
+    text-transform: uppercase;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    /* Helvetica Neue Light — the quiet metadata whisper (never regular) */
+    font-weight: 300;
+  }
+
+  /* bracket tag — [STUDY] [SYSTEM] [SPECULATIVE] — bold label */
+  .tag {
+    font-family: var(--font-ui);
+    font-size: var(--fs-tag);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+    font-weight: 700;
+  }
+  .tag::before {
+    content: "[";
+  }
+  .tag::after {
+    content: "]";
+  }
+
+  /* ---- pills — confident interface objects (Jun-scale) ----
+     Bigger, Helvetica Neue Bold, black outline / white fill / black text.
+     One spec used for every pill across the UI. */
+  .fn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 0.85rem 1.7rem;
+    font-family: var(--font-ui);
+    font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--black);
+    background: var(--white);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .fn-pill:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+  .fn-pill--filled {
+    background: var(--black);
+    color: var(--white);
+  }
+  .fn-pill--filled:hover {
+    background: var(--white);
+    color: var(--black);
+  }
+  .fn-pill .ar {
+    transition: transform 0.3s ease;
+  }
+  .fn-pill:hover .ar {
+    transform: translate(3px, -3px);
+  }
+
+  /* legacy .btn -> behaves like a pill so old pages stay coherent */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--black);
+    background: transparent;
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    padding: 0.7rem 1.3rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  /* text link — underline grows on hover */
+  .link {
+    color: var(--black);
+    text-decoration: none;
+    position: relative;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .link:hover {
+    border-bottom-color: var(--black);
+  }
+}
+
+@layer utilities {
+  .tracking-mono {
+    letter-spacing: 0.06em;
+  }
+  .figframe {
+    border: 1px solid var(--black);
+  }
+}
+
+/* ---- résumé / experience — collapsible reveal ---- */
+.exp-row {
+  transition: opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.exp-row:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 6px;
+}
+.exp-toggle {
+  transition: transform 0.3s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+/* the bullets panel — animates open via grid-template-rows (0fr -> 1fr) */
+.exp-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.5s cubic-bezier(0.16, 0.84, 0.3, 1),
+    opacity 0.4s ease;
+}
+.exp-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.exp-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .exp-panel {
+    transition: none;
+  }
+}
+
+/* ---- archive / index rows (essays + clients) ---- */
+.fn-archive-row {
+  padding: clamp(14px, 1.8vw, 24px) 0;
+}
+.fn-archive-title {
+  font-size: clamp(28px, 5vw, 76px);
+  letter-spacing: -0.02em;
+}
+.fn-archive-ix {
+  font-size: clamp(18px, 2vw, 30px);
+  transform: translateX(-12px);
+}
+@media (hover: hover) {
+  .fn-archive-row {
+    transition: padding-left 0.4s cubic-bezier(0.16, 0.84, 0.3, 1);
+  }
+  .fn-archive-row:hover {
+    padding-left: clamp(24px, 3vw, 52px);
+  }
+  .fn-archive-row:hover .fn-archive-ix {
+    transform: translateX(0);
+  }
+}
+
+/* ---- email pill banner ----
+   Same pill metrics + typography as .fn-pill (LinkedIn / Instagram). The
+   address drifts in one at a time with a generous gap — intentionally timed
+   and spaced, never a dense back-to-back loop. */
+.fn-email-pill {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  border: 2.5px solid var(--black);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--black);
+  padding: 0.8rem 0;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.fn-email-pill:hover {
+  background: var(--black);
+  color: var(--white);
+}
+.fn-email-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: fn-email-float 22s linear infinite;
+}
+.fn-email-pill:hover .fn-email-track {
+  animation-play-state: paused;
+}
+.fn-email-grp {
+  display: inline-flex;
+  align-items: center;
+}
+.fn-email-grp > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  /* the breathing room that makes one address read at a time */
+  padding-right: clamp(9rem, 26vw, 18rem);
+  /* match the LinkedIn / Instagram pill typography exactly */
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+  letter-spacing: -0.01em;
+}
+@keyframes fn-email-float {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---- hover-to-reveal logo (Jump / UCSD) — no underline ---- */
+.fn-hoverword {
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.fn-hoverword:hover {
+  opacity: 0.55;
+}
+.fn-logo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition: opacity 0.22s ease, transform 0.32s cubic-bezier(0.16, 0.84, 0.3, 1);
+  will-change: transform, opacity;
+}
+.fn-logo-overlay.on {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.fn-logo-overlay img {
+  display: block;
+  height: auto;
+}
+
+/* ---- ethnographer — editorial scroll reveal ---- */
+.obs-reveal {
+  opacity: 1;
+  transform: none;
+}
+html.obs-anim .obs-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+html.obs-anim .obs-reveal.in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1s cubic-bezier(0.16, 0.84, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+.obs-row {
+  transition: padding-left 0.4s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+@media (hover: hover) {
+  .obs-row:hover {
+    padding-left: clamp(14px, 1.6vw, 32px);
+  }
+}
+/* the ethnographer's reading lens — never on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .eth-reticle {
+    display: none;
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fn-email-track {
+    animation: none;
+  }
+  html.obs-anim .obs-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
