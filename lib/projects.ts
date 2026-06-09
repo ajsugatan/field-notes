@@ -25,17 +25,17 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "001",
-    title: "BLENDER — Notes on an Intimidating Room",
+    title: "BLENDER — A First-Use System for Beginners",
     short: "BLENDER",
     type: "STUDY",
     year: "2026",
     blurb:
-      "An interface field study of how creative software greets the people it wasn't built for.",
+      "Designing a first-use system for beginners who get lost before they ever get good.",
     href: "/studies/blender",
     rail: {
       label: "BLENDER",
       specimen: "audit",
-      annotation: "fig. 01 — 47 controls, no primary action",
+      annotation: "fig. 01 — stay oriented, recover, finish one object",
     },
   },
   {
