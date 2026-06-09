@@ -97,7 +97,6 @@ const nav = [
     num: s.num,
     title: s.caption.split(" — ")[0].toUpperCase(),
   })),
-  { id: "board", num: "09", title: "BOARD" },
 ];
 
 export default function BlenderCase() {
@@ -220,31 +219,6 @@ export default function BlenderCase() {
                 />
               </section>
             ))}
-
-            {/* APPENDIX — the full board */}
-            <section id="board" className="scroll-mt-28 pt-12 border-t border-hairline">
-              <div className="flex items-baseline gap-4 mb-8">
-                <span className="mono text-ink">09</span>
-                <h2 className="mono text-ink m-0" style={{ fontSize: "var(--fs-meta)" }}>
-                  THE COMPLETE BOARD
-                </h2>
-              </div>
-              <p
-                className="font-sans text-ink-soft mb-8 max-w-[60ch]"
-                style={{ fontSize: "var(--fs-body)" }}
-              >
-                Every frame on one surface — the full COGS 127 board, exactly as
-                presented.
-              </p>
-              <SlideFigure
-                src="/case-studies/blender/10-complete-board.svg"
-                alt="The complete COGS 127 Blender board — all frames on a single surface."
-                fig="fig. 09"
-                caption="the complete board"
-                width={1723}
-                height={4134}
-              />
-            </section>
           </div>
 
           {/* NEXT */}
