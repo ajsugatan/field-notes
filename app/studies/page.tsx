@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import IndexRow from "@/components/IndexRow";
 import MarginRail from "@/components/rail/MarginRail";
 import { projects } from "@/lib/projects";
@@ -31,6 +32,37 @@ export default function StudiesPage() {
               progress and will open when they&apos;ve earned the entry.
             </p>
           </header>
+
+          {/* Quarter Portfolio: a quiet featured entry, set apart from the
+              numbered case index. Subtle but discoverable. */}
+          <Link
+            href="/studies/quarter"
+            className="group block no-underline border-y border-ink py-6 mb-10"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <div className="mono text-ink-soft mb-2">
+                  QUARTER PORTFOLIO · SPRING 2026
+                </div>
+                <div
+                  className="display lowercase text-ink"
+                  style={{ fontSize: "var(--fs-h2)", fontWeight: 200, lineHeight: 1.1 }}
+                >
+                  selected work, edited down.
+                </div>
+                <p
+                  className="font-sans text-ink-soft mt-1 mb-0 max-w-[52ch]"
+                  style={{ fontSize: "var(--fs-small)" }}
+                >
+                  A curated feature: three pieces from this quarter and a concrete
+                  self-assessment.
+                </p>
+              </div>
+              <span className="mono text-ink group-hover:text-red transition-colors shrink-0">
+                ↗
+              </span>
+            </div>
+          </Link>
 
           <div className="hidden md:grid grid-cols-[3rem_1fr_8.5rem_4rem_1.5rem] gap-x-4 pb-2 border-b border-ink">
             <span className="mono text-ink">##</span>
