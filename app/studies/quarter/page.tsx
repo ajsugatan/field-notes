@@ -123,6 +123,119 @@ function TypeSpecimen({
   );
 }
 
+// A curated PDF artifact, set in the site's figure grammar: a real first-page
+// preview (cropped from the top of the document, never a faked mockup) beside
+// a titled panel with context and a view / download affordance. The whole
+// preview is a link to the file; the panel repeats it explicitly for clarity.
+function PdfArtifact({
+  kicker,
+  title,
+  caption,
+  thumb,
+  thumbAlt,
+  href,
+  meta,
+  fig,
+  figCaption,
+}: {
+  kicker: string;
+  title: string;
+  caption: string;
+  thumb: string;
+  thumbAlt: string;
+  href: string;
+  meta: string;
+  fig: string;
+  figCaption: string;
+}) {
+  return (
+    <motion.figure
+      className="m-0"
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
+      transition={{ duration: 0.6, ease: [0.16, 0.84, 0.3, 1] }}
+    >
+      <div className="figframe bg-white grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+        {/* first-page preview: links to the file */}
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block aspect-[16/11] overflow-hidden bg-white border-b md:border-b-0 md:border-r border-hairline no-underline"
+          aria-label={`Open ${title} (PDF) in a new tab`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={thumb}
+            alt={thumbAlt}
+            loading="lazy"
+            decoding="async"
+            className="block w-full h-auto object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+          <span className="absolute right-3 top-3 mono text-ink bg-white/85 backdrop-blur-sm px-2 py-1 border border-hairline">
+            PDF
+          </span>
+        </a>
+
+        {/* context panel */}
+        <div className="flex flex-col justify-between gap-6 p-5 md:p-6">
+          <div>
+            <div className="flex items-center justify-between gap-3">
+              <span className="mono text-ink">{kicker}</span>
+              <Crosshair size={12} />
+            </div>
+            <h4
+              className="display text-ink mt-4 mb-0"
+              style={{
+                fontWeight: 200,
+                fontSize: "clamp(1.5rem,2.6vw,2.1rem)",
+                lineHeight: 1.06,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {title}
+            </h4>
+            <p
+              className="font-sans text-ink-soft mt-3 mb-0 max-w-[46ch]"
+              style={{ fontSize: "var(--fs-body)" }}
+            >
+              {caption}
+            </p>
+          </div>
+
+          <div className="border-t border-hairline pt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <span className="mono text-ink-soft">{meta}</span>
+            <div className="flex items-center gap-5">
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mono text-ink no-underline hover:text-red"
+              >
+                VIEW ↗
+              </a>
+              <a
+                href={href}
+                download
+                className="mono text-ink-soft no-underline hover:text-red"
+              >
+                DOWNLOAD
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption className="flex items-baseline gap-3 mt-3">
+        <span className="mono text-ink">{fig}</span>
+        <span className="mono text-ink-soft normal-case tracking-mono">
+          {figCaption}
+        </span>
+      </figcaption>
+    </motion.figure>
+  );
+}
+
 // ---- the work ----
 
 const nav = [
@@ -546,6 +659,21 @@ export default function QuarterPortfolio() {
                   </p>
                 </Block>
               </div>
+
+              {/* key artifact: the program document itself */}
+              <div className="mt-12">
+                <PdfArtifact
+                  kicker="ARTIFACT / PROGRAM DOC"
+                  title="Design Lab: 0 to Won"
+                  caption="A five-week studio system for helping students turn specific user problems into deployable work, portfolio narratives, and critique-ready product decisions."
+                  thumb="/case-studies/quarter/design-lab-zero-to-won-thumb.jpg"
+                  thumbAlt="First page of the Design Lab: 0 to Won program document."
+                  href="/case-studies/quarter/design-lab-zero-to-won.pdf"
+                  meta="PDF · PROGRAM DOC · 374 KB"
+                  fig="fig. 03.1"
+                  figCaption="program document / outreach, curriculum, and the outcomes it commits to"
+                />
+              </div>
             </section>
 
             {/* ===================== 04 - SELF-ASSESSMENT ===================== */}
@@ -613,6 +741,21 @@ export default function QuarterPortfolio() {
                   </li>
                 ))}
               </ol>
+
+              {/* closing artifact: the final critique board */}
+              <div className="mt-12">
+                <PdfArtifact
+                  kicker="ARTIFACT / FINAL CRITIQUE"
+                  title="Final Critique"
+                  caption="A closing artifact that captures the work I chose to stand behind, the critique I received, and the design judgment I developed through the quarter."
+                  thumb="/case-studies/quarter/final-critique-thumb.jpg"
+                  thumbAlt="First page of the final critique board."
+                  href="/case-studies/quarter/final-critique.pdf"
+                  meta="PDF · CRITIQUE BOARD · 4.3 MB"
+                  fig="fig. 04.1"
+                  figCaption="critique board / the work I stood behind and what it drew out"
+                />
+              </div>
 
               <div className="mt-12 pt-8 border-t border-ink flex items-start gap-4">
                 <Crosshair size={16} className="mt-1.5 shrink-0" />
